@@ -130,6 +130,11 @@ topoplot(epoched_example,
          limits = c(-4, 4))
 ```
 
+```{r}
+epoched_fixed <- ar_FASTER(epoched_example, exclude = 65:70)
+plot_butterfly(epoched_fixed)
+```
+
 At any point, `eegUtils` objects can be transformed into data frames for use with functions that don't natively support them.
 
 ```{r}
@@ -141,7 +146,7 @@ epoched_example %>%
   as.data.frame(long = TRUE) %>%
   ggplot(aes(x = time, y = amplitude)) +
   geom_line(aes(group = epoch), alpha = 0.2) + 
-  stat_summary(fun.y = mean,
+  stat_summary(fun = mean,
                geom = "line",
                size = 2,
                aes(colour = electrode)) + 
